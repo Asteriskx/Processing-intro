@@ -1,0 +1,53 @@
+void setup(){
+  size(300, 300);
+}
+ 
+void draw(){
+  pentagon(75, 75, 150);
+  hexagon(225, 75, 150);
+  heart(75, 225, 150, 150);
+}
+ 
+//  ŒÜŠpŒ`‚Ì•`‰æ
+void pentagon(float centerX, float centerY, float size){
+  final float COS[] = {0.95105654, 0.5877853, -0.5877852, -0.95105654, 0};
+  final float SIN[] = {-0.309017, 0.809017, 0.809017, -0.30901697, -1};
+ 
+  final float RADIUS = size / 2;
+  beginShape();
+  for(int i = 0; i < 5; i++){
+    float tx = COS[i] * RADIUS + centerX;
+    float ty = SIN[i] * RADIUS + centerY;
+    vertex(tx, ty);
+  }
+  endShape(CLOSE);
+}
+ 
+//  ˜ZŠpŒ`‚Ì•`‰æ
+void hexagon(float centerX, float centerY, float size){
+  final float COS[] = {1, 0.5, -0.5, -1, -0.5, 0.5};
+  final float SIN[] = {0, 0.8660254,  0.8660254, 0, -0.86602524, -0.86602524};
+ 
+  final float RADIUS = size / 2;
+  beginShape();
+  for(int i = 0; i < 6; i++){
+    float tx = COS[i] * RADIUS + centerX;
+    float ty = SIN[i] * RADIUS + centerY;
+    vertex(tx, ty);
+  }
+  endShape(CLOSE);
+}
+ 
+//  ƒn[ƒgŒ`‚Ì•`‰æ
+void heart(float centerX, float centerY, float width, float height){
+  final float WIDTH = width / 2 * 0.85;
+  final float HEIGHT = height / 2;
+  final float OFFSET = centerY - (HEIGHT / 6 * 5);
+  beginShape();
+  for(int i = 0; i < 30; i++){
+    float tx = abs(sin(radians(i * 12))) * (1 + cos(radians(i * 12))) * sin(radians(i * 12)) * WIDTH + centerX;
+    float ty = (0.8 + cos(radians(i * 12))) * cos(radians(i * 12)) * HEIGHT + OFFSET;
+    vertex(tx, ty);
+  }
+  endShape(CLOSE);
+}
